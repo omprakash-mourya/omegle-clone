@@ -3,9 +3,14 @@
 import { Button } from "@nextui-org/react";
 import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
+import { Session } from 'next-auth';
 
 export default function Home() {
   const { data: session } = useSession();
+
+  const handleStartChat = async (session: Session | null) => {
+    // ... existing code ...
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-gradient-to-b from-blue-900 to-black p-4">
