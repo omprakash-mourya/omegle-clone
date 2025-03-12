@@ -6,8 +6,13 @@ const prisma = new PrismaClient();
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST']
+    origin: [
+      'https://kisanswap.in',
+      'https://www.kisanswap.in',
+      process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true
   }
 });
 
