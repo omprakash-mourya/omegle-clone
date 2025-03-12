@@ -7,16 +7,17 @@
     "build": "npm install && npm run generate && npm run compile",
     "generate": "prisma generate",
     "compile": "node ./node_modules/typescript/bin/tsc",
-    "dev": "prisma generate && ts-node server.ts"
+    "dev": "prisma generate && ts-node server.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",
     "socket.io": "^4.7.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "prisma": "^5.10.2"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "prisma": "^5.10.2",
     "ts-node": "^10.9.2"
   }
 } 

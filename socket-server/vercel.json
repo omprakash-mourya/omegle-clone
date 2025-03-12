@@ -1,1 +1,1 @@
-{"version": 2,"builds": [{"src": "dist/server.js","use": "@vercel/node"}],"routes": [{"src": "/(.*)","dest": "dist/server.js"}],"buildCommand": "npm run build","installCommand": "npm install","framework": null}
+{"version": 2,"builds": [{"src": "dist/server.js","use": "@vercel/node"}],"routes": [{"src": "/(.*)","dest": "dist/server.js"}],"buildCommand": "npm run build","installCommand": "npm install","framework": null,"env": {"DATABASE_URL": "@database_url", "NODE_ENV": "production"}}
