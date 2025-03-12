@@ -1,19 +1,19 @@
 {
   "name": "omegle-socket-server",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc",
-    "dev": "ts-node server.ts"
+    "build": "npm install && npx tsc",
+    "dev": "prisma generate && ts-node server.ts"
   },
   "dependencies": {
-    "@prisma/client": "^6.5.0",
-    "socket.io": "^4.8.1"
+    "@prisma/client": "^5.10.2",
+    "socket.io": "^4.7.4"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "prisma": "^6.5.0",
+    "prisma": "^5.10.2",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }
