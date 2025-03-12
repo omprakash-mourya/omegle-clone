@@ -21,6 +21,7 @@ const handler = NextAuth({
       return session;
     },
   },
+  debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin',
