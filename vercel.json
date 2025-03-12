@@ -6,7 +6,7 @@
       "use": "@vercel/next",
       "config": {
         "buildCommand": "npm run build",
-        "installCommand": "npm install"
+        "installCommand": "npm install --legacy-peer-deps"
       }
     }
   ],
