@@ -4,7 +4,9 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "npm install && npx tsc",
+    "build": "npm install && npm run generate && npm run compile",
+    "generate": "prisma generate",
+    "compile": "tsc",
     "dev": "prisma generate && ts-node server.ts"
   },
   "dependencies": {
