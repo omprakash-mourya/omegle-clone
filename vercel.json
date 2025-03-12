@@ -3,15 +3,15 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next",
-      "config": {
-        "buildCommand": "npm run build",
-        "installCommand": "npm install --legacy-peer-deps"
-      }
+      "use": "@vercel/next"
     }
   ],
   "env": {
-    "NEXTAUTH_URL": "https://${VERCEL_URL}",
-    "NEXT_PUBLIC_APP_URL": "https://${VERCEL_URL}"
+    "NEXTAUTH_URL": "https://omegle-feclyx115-omprakash-mouryas-projects.vercel.app"
+  },
+  "build": {
+    "env": {
+      "NEXTAUTH_URL": "https://omegle-feclyx115-omprakash-mouryas-projects.vercel.app"
+    }
   }
 } 
