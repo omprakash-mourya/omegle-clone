@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@nextui-org/react';
 import { Video, Mic, MicOff, VideoOff } from 'lucide-react';
 import SimplePeer from 'simple-peer';
-import io from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 
 export default function ChatPage() {
   const { data: session, status } = useSession();
@@ -18,8 +18,8 @@ export default function ChatPage() {
   
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
-  const socketRef = useRef<any>(null);
-  const peerRef = useRef<any>(null);
+  const socketRef = useRef<Socket | null>(null);
+  const peerRef = useRef<SimplePeer.Instance | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
   useEffect(() => {
@@ -47,19 +47,19 @@ export default function ChatPage() {
         });
 
       // Socket event handlers
-      socketRef.current.on('matched', ({ initiator, targetId }) => {
+      socketRef.current.on('matched', ({ initiator, targetId }: { initiator: boolean; targetId: string }) => {
         setIsMatching(false);
         setIsChatting(true);
         
         // Create peer connection
         const peer = new SimplePeer({
           initiator,
-          stream: streamRef.current,
+          stream: streamRef.current || undefined,
           trickle: false,
         });
 
-        peer.on('signal', (data: any) => {
-          socketRef.current.emit('signal', { signal: data, targetId });
+        peer.on('signal', (data: SimplePeer.SignalData) => {
+          socketRef.current?.emit('signal', { signal: data, targetId });
         });
 
         peer.on('stream', (remoteStream: MediaStream) => {
@@ -68,9 +68,12 @@ export default function ChatPage() {
           }
         });
 
-        socketRef.current.on('signal', ({ signal }) => {
-          peer.signal(signal);
-        });
+        const socket = socketRef.current;
+        if (socket) {
+          socket.on('signal', ({ signal }: { signal: SimplePeer.SignalData }) => {
+            peer.signal(signal);
+          });
+        }
 
         peerRef.current = peer;
       });
